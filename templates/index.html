@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Wall</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="hearder">
+        <h1>The Great Wall of Dojo</h1>
+        <hr>
+      </div>
+      <!-- Register form -->
+      <div class="register">
+        <h4>Register Account!</h4>
+        <form class="" action="/register" method="post">
+          <input type="text" name="first_name" value="" placeholder="First Name">
+          <input type="text" name="last_name" value="" placeholder="Last Name">
+          <input type="email" name="email" value="" placeholder="Email">
+          <input type="password" name="password" value="" placeholder="Password">
+          <input type="password" name="verify_password" value="" placeholder="Confirm Password">
+          <input type="submit" name="" value="Register Account">
+        </form>
+      </div>
+      <!-- End registration form -->
+      <!-- Login Form -->
+      <div class="login">
+        <h4>Already Member? Login</h4>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p class="flash_error">{{ message }}</p>
+              <p class="flash_success">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form class="" action="/login" method="post">
+          <input type="email" name="email" value="" placeholder="Email">
+          <input type="password" name="password" value="" placeholder="Password">
+          <input type="submit" name="" value="Log in">
+        </form>
+      </div>
+      <!-- End login form -->
+    </div>
+    <!-- End of wrapper -->
+  </body>
+</html>

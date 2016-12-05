@@ -1,0 +1,144 @@
+#wrapper {
+  width: 980px;
+  background: #f8f8f8;
+  padding:20px 0 200px 40px;
+  margin: 0 auto;
+}
+
+.register {
+  width: 400px;
+  margin-right: 100px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.login {
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 100;
+  margin-bottom: 20px;
+}
+
+input[type=submit] {
+  width: 60%;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 100;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+}
+
+/*input[type=submit] .logoutBtn {
+  background-color: red;
+  width: 42%;
+  vertical-align: baseline;
+}*/
+
+hr {
+  width: 94%;
+  float: left;
+  margin-bottom: 20px;
+  border-top: solid 1px #b9b9b9;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  font-family: arial;
+  color: #b9b9b9;
+  text-align: center;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 40px;
+  font-family: arial;
+  font-weight: 100;
+}
+
+h4 {
+  font-family: arial;
+}
+
+.flash_success {
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-family: arial;
+  width: 40%;
+  display: block;
+}
+
+.flash_error {
+  width: 40%;
+  font-size: 14px;
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-family: arial;
+  display: block;
+}
+
+.header {
+  width: 320px;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.hearder, h2, p {
+  display: inline;
+  margin-right: 470px;
+  font-family: arial;
+}
+
+.hearder, h3 {
+  display: inline;
+  margin-right: 38px;
+  font-family: arial;
+}
+
+a {
+  text-decoration: none;
+  font-family: arial;
+}
+
+textarea {
+  width: 93%;
+  margin: 20px 0;
+  padding: 10px;
+  font-size: 14px;
+  font-family: arial;
+}
+
+forms, .comments {
+  width: 80%;
+  float: left;
+}
+
+/*.postsBtn, input[type=submit] {
+  background-color: #6f6f6f;
+  float: right;
+  margin-right: 20px;
+}
+
+.commentsBtn, input[type=submit] {
+  background-color: #5f5fc5;
+  float: right;
+  margin-right: 20px;
+  margin-top: 0px;
+}*/
