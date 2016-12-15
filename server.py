@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, flash, request, redirect, url
 from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import os
+import re
 app = Flask(__name__)
 app.secret_key = "fadf34trr32resgfb=Rxlxs80gaeaDfdz"
 bcrypt = Bcrypt(app)
@@ -34,6 +35,15 @@ def register():
 
     mysql.query_db(query, data)
 
+    # session['email'] = request.form['email']
+    # session['password'] = request.form['password']
+    #
+    # query = "SELECT * FROM users WHERE email = :email LIMIT 1"
+    # data = { 'email': session['email'] }
+    #
+    # session['id'] = user[0]['id']
+    # session['first_name'] = user[0]['first_name']
+
     return redirect('/')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,40 +53,85 @@ def login():
 
     query = "SELECT * FROM users WHERE email = :email LIMIT 1"
     data = { 'email': session['email'] }
-
     user = mysql.query_db(query, data)
     if bcrypt.check_password_hash(user[0]['password'], session['password']):
-        session['id'] = id
-        return redirect('/wall/', id=id)
+        session['id'] = user[0]['id']
+        session['first_name'] = user[0]['first_name']
+        # print "Set session", session['first_name']
+        # Double check the above!
+        return redirect('/wall')
     else:
         flash ("Your entred invalid credentials, please try again!")
 
     return redirect('/')
 
-
-@app.route('/wall/<id>', methods=['GET', 'POST'])
-def wall(id):
-    flash ("You have successfully logged in!")
-
-    query = "SELECT * FROM users WHERE id = :id LIMIT 1"
-    data = { 'id': id }
-
-    user = mysql.query_db(query, data)
-    print user
-    return render_template('wall.html', users = user[0], id=id)
-
-
 @app.route('/post', methods=['POST'])
 def make_post():
 
-    query = "INSERT INTO messages (messages.messages) VALUES (:post_submit)"
-    data = { 'post_submit': request.form['post_submit'] }
+    query = "INSERT INTO messages (messages, created_at, updated_at, user_id) VALUES (:post_submit, NOW(), NOW(), :session_id)"
+    data = {
+            'post_submit': request.form['wall_post'],
+            'session_id':session['id']
+            }
 
     post_message = mysql.query_db(query, data)
-    print post_message
 
-    return redirect('/wall', post_message=post_message)
+    return redirect('/wall')
 
+@app.route('/delete/<post_id>', methods=['POST'])
+def delete_post(post_id):
+
+    query = "DELETE FROM messages, user_id LEFT JOIN users WHERE messages.id = :post_id"
+    data = { 'user_id': session['id'], 'post_id': post_id }
+
+    delete_message = mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+@app.route('/comments', methods=['POST'])
+def make_comment():
+
+    query = "INSERT INTO comments (comments, created_at, updated_at, message_id, user_id) VALUES (:comment, NOW(), NOW(), :message_id, :user_id)"
+    data = {
+            'comment': request.form['comment_post'],
+            'message_id': request.form['hidden'],
+            'user_id':session['id']
+            }
+
+    mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+@app.route('/delete/<comment_id>', methods=['POST'])
+def delete_comment(comment_id):
+
+    query = "DELETE FROM comments WHERE comments.id = :comment_id LEFT JOIN users ON comments.user_id = users.id"
+    data = { 'user_id': session['id'], 'comment_id': comment_id }
+
+    delete_comment = mysql.query_db(query, data)
+    print "Deleting route working!"
+    return redirect('/wall')
+
+@app.route('/wall')
+def show_post():
+
+    query = "SELECT messages.messages, messages.id, messages.created_at, users.first_name, users.last_name FROM messages JOIN users ON messages.user_id = users.id  ORDER BY created_at DESC"
+
+    messages = mysql.query_db(query)
+
+    query = "SELECT comments.comments, comments.id, comments.created_at, users.first_name, users.last_name , comments.message_id FROM comments LEFT JOIN users ON comments.user_id = users.id  ORDER BY created_at ASC"
+
+    comments = mysql.query_db(query)
+    # print comments
+
+    query = "SELECT first_name FROM users WHERE ID = :session_id"
+    data = {
+            'session_id': session['id']
+            }
+
+    first_name = mysql.query_db(query, data)
+
+    return render_template('wall.html', messages=messages, comments=comments, name=first_name)
 
 
 @app.route('/logout')
@@ -114,3 +169,15 @@ def static_file_hash(filename):
 
 
 app.run(debug=True)
+
+#
+# @app.route('/wall')
+# def wall():
+#     flash ("You have successfully logged in!")
+#
+#     query = "SELECT * FROM users WHERE id = :id LIMIT 1"
+#     data = { 'id': id }
+#
+#     user = mysql.query_db(query, data)
+#     print user
+#     return render_template('wall.html', users = user)

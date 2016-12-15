@@ -4,28 +4,43 @@
     <meta charset="utf-8">
     <title>The Wall | Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://use.typekit.net/iii7xtz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
-  <body>
-    <div id="wrapper">
-      <h2>My Profile</h2>
-      <div class="header">
-        <h3>Welcome, {{ users['first_name'] }} {{ users['last_name'] }}</h3>
-      <a href="{{ url_for('logout') }}"><strong>Logout</strong></a>
-      </div>
-      <!-- End header div -->
-      <div class="wall">
-        <p>Post a message:</p>
-        <form class="" action="/post" method="post">
-          <textarea name="wall_post" rows="8" cols="80"></textarea>
-          <input class="postsBtn" type="submit" name="post_submit" value="Post Message">
-        </form>
-        <p>Post a comment:</p>
-        <form class="comments" action="/" method="post">
-          <textarea name="wall_post" rows="8" cols="20"></textarea>
-          <input class="commentsBtn" type="submit" name="comment_submit" value="Post Comment">
-        </form>
-      </div>
-    </div>
-    <!-- End Wrapper -->
+<body>
+<div id="wrapper">
+<div class="logo">The Great Wall of Dojo</div>
+<div class="header">
+<p>Welcome {{ session['first_name'] }}  </i><a href="{{ url_for('logout') }}"><strong> Logout</strong></a>
+</div>
+  <!-- End header div -->
+<div class="wall">
+  <!-- Form for posting messages starts here -->
+  <form class="" action="/post" method="post">
+    <textarea name="wall_post" rows="4" cols="118" placeholder="Enter text here to post a message"></textarea>
+    <input class="postsBtn" type="submit" name="post_submit" value="Post Message">
+  </form>
+  <!-- Loop for messages being posted starts here -->
+  {% for i in messages: %}
+  <h5 class="post">Posted by: {{ i['first_name']}} on {{i['created_at']}} | <a href="/delete/{{i['id']}}">Delete</a></h5>
+  <p>{{ i['messages'] }}</p>
+  {% for j in comments:%}
+  {% if i['id'] == j['message_id']%}
+  <!-- Comments start here -->
+  <div class="comments">
+    <h6>Comment left by: {{ j['first_name'] }} on {{ j['created_at'] }} | <a href="/delete/{{j['id']}}">Delete</a></h6>
+    <p>{{j['comments']}}</p>
+    {%endif%}
+    {%endfor%}
+    <form class="" action="/comments" method="post">
+      <input type="hidden" name="hidden" value="{{i['id']}}">
+      <textarea name="comment_post" rows="4" cols="100" placeholder="Leave a comment to this post by entering your comment here!"></textarea>
+      <input class="commentsBtn" type="submit" name="comment_submit" value="Post Comment">
+    </form>
+    {% endfor %}
+  </div>
+</div>
+</div>
+<!-- End Wrapper -->
   </body>
 </html>

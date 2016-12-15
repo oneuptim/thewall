@@ -1,8 +1,12 @@
+body {
+  font-family: "futura-pt",sans-serif;
+}
 #wrapper {
   width: 980px;
   background: #f8f8f8;
   padding:20px 0 200px 40px;
   margin: 0 auto;
+  display: block;
 }
 
 .register {
@@ -27,12 +31,11 @@ input {
 }
 
 input[type=submit] {
-  width: 60%;
   padding: 12px;
   font-size: 18px;
   font-weight: 100;
   margin-top: 20px;
-  background-color: #4CAF50;
+  /*background-color: #4CAF50;*/
   color: #fff;
   border: none;
 }
@@ -51,23 +54,23 @@ hr {
 }
 
 h1 {
-  font-size: 60px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 100;
   margin-bottom: 40px;
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
   color: #b9b9b9;
-  text-align: center;
+  text-transform: uppercase;
 }
 
 h2 {
   font-size: 30px;
   margin-bottom: 40px;
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
   font-weight: 100;
 }
 
 h4 {
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
 }
 
 .flash_success {
@@ -77,7 +80,7 @@ h4 {
   padding: 10px;
   width: 100%;
   text-align: center;
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
   width: 40%;
   display: block;
 }
@@ -90,55 +93,134 @@ h4 {
   padding: 10px;
   width: 100%;
   text-align: center;
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
   display: block;
 }
 
 .header {
   width: 320px;
+  margin-bottom: 50px;
+  margin-top: -60px;
+  margin-left: 715px;
+}
+
+.logo {
+  width: 440px;
   display: inline-block;
-  margin-bottom: 40px;
+  height: 60px;
+  font-size: 37px;
+  font-family: "futura-pt",sans-serif;
+  font-weight: 100;
+  margin-top: 20px;
+  color: #cacaca;
+  text-transform: uppercase;
 }
 
-.hearder, h2, p {
+h2 {
   display: inline;
-  margin-right: 470px;
-  font-family: arial;
+  margin-right: 350px;
+  font-family: "futura-pt",sans-serif;
 }
 
-.hearder, h3 {
+h3 {
   display: inline;
-  margin-right: 38px;
-  font-family: arial;
+  margin-right: 0px;
+  font-family: "futura-pt",sans-serif;
 }
 
 a {
   text-decoration: none;
-  font-family: arial;
+  font-family: "futura-pt",sans-serif;
 }
 
 textarea {
-  width: 93%;
-  margin: 20px 0;
+  width: 95%;
   padding: 10px;
-  font-size: 14px;
-  font-family: arial;
+  font-size: 18px;
+  font-family: "futura-pt",sans-serif;
+  font-weight: 100;
 }
 
-forms, .comments {
-  width: 80%;
-  float: left;
-}
-
-/*.postsBtn, input[type=submit] {
-  background-color: #6f6f6f;
+.postsBtn {
+  background-color: #4caf50;
   float: right;
-  margin-right: 20px;
+  width: 25%;
+  margin-right: 25px;
+  border-radius: 3px;
+  font-family: "futura-pt",sans-serif;
 }
 
-.commentsBtn, input[type=submit] {
-  background-color: #5f5fc5;
+.spashBtn {
+  background-color: #4CAF50;
+  width: 105%;
+  border-radius: 4px;
+  font-family: "futura-pt",sans-serif;
+  }
+
+.commentsBtn {
+  background-color: #6666a9;
   float: right;
-  margin-right: 20px;
-  margin-top: 0px;
+  width: 25%;
+  margin-right: 25px;
+  border-radius: 3px;
+  font-family: "futura-pt",sans-serif;
+}
+
+.posts {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline;
+}
+
+.comments {
+  display: inline;
+  /*background-color: pink;*/
+}
+
+/*textarea .comments {
+  height: 10px;
 }*/
+
+.wall {
+  width: 900px;
+  /*background-color: yellow;*/
+  padding: 20px;
+}
+
+/*h5 {
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "futura-pt",sans-serif;
+  margin-bottom: 0px;
+  color: #6060d4;
+}*/
+
+.post, h5 {
+  font-size: 14px;
+  margin-bottom: 0px;
+  color: #6060d4;
+  margin-top: 120px;
+}
+
+a, h5 {
+  color: red;
+  opacity: 0.4;
+}
+
+a:hover, h5 {
+  color: red;
+  opacity: 1;
+}
+
+h6 {
+  font-size: 12px;
+  font-family: "futura-pt",sans-serif;
+  margin-bottom: 0px;
+  color: #6060d4;
+}
+
+p {
+  font-size: 18px;
+  font-family: "futura-pt",sans-serif;
+  font-weight: 100;
+}

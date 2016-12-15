@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>The Wall</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://use.typekit.net/iii7xtz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
   <body>
     <div id="wrapper">
@@ -20,7 +22,7 @@
           <input type="email" name="email" value="" placeholder="Email">
           <input type="password" name="password" value="" placeholder="Password">
           <input type="password" name="verify_password" value="" placeholder="Confirm Password">
-          <input type="submit" name="" value="Register Account">
+          <input type="submit" name="" value="Register Account" class="spashBtn">
         </form>
       </div>
       <!-- End registration form -->
@@ -28,7 +30,7 @@
       <div class="login">
         <h4>Already Member? Login</h4>
         {% with messages = get_flashed_messages() %}
-          {% if messages %}
+          {% if messages: %}
             {% for message in messages %}
               <p class="flash_error">{{ message }}</p>
               <p class="flash_success">{{ message }}</p>
@@ -38,7 +40,7 @@
         <form class="" action="/login" method="post">
           <input type="email" name="email" value="" placeholder="Email">
           <input type="password" name="password" value="" placeholder="Password">
-          <input type="submit" name="" value="Log in">
+          <input type="submit" name="" value="Log in" class="spashBtn">
         </form>
       </div>
       <!-- End login form -->
